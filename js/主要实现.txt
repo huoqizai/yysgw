@@ -1,0 +1,106 @@
+home  背景部分  object(借鉴源码)  设置多个背景图片  body.noScroll
+首屏 滑入显示  opacity 0 left-200  进入页面后显示出来
+首页视频按钮 视频弹窗  （页面借鉴源码）
+ <!--新版本情报-->  li标签注意上面要设置4个i  不同时间逐一显示
+  设置自定义滚动条 $.each 点击滑块拖动 鼠标滚轮事件(没有兼容问题)
+  点击滚动条动画  点击位置y =  e.clientY - (this.off.top - scrollTop)
+  top = bar.position().top
+  y<top?top-100:top+100
+$mainTxt.stop().animate({"top" : -top*mainH/txtH},500);
+点击弹出全屏窗  $popLi.eq(index).show().siblings().hide();
+
+
+//滚轮延迟显示
+
+(function(){
+   var $newinfo = $('#newinfo'),
+   $title = $newinfo.find('.title'),
+   $infoListLi = $newinfo.find('.infoList li'),
+   objArr = [];
+ init($title,$infoListLi);
+
+ $(window).scroll(function(){
+  var height = $(document).scrollTop() + $(window).height();
+  for(var i=objArr.length;i>=0;i--){
+  var obj = objArr[i];
+   if(height > obj.oddTop){
+    (function(){
+      var $This = $(obj);
+       setTimeout(function(){
+      $This.removeClass('hide')
+     
+    },($This.index()%3)*200);
+      objArr.slice(i,1)
+     })()
+   }
+
+  }
+
+ })
+
+ function  init(){
+  for(var i=0,length = anguments.length;i<length;i++){
+     arguments[i].each(function(){
+     this.oddTop = $(this).offset().top;
+     objArr.push(this);
+ 
+    })
+
+  }
+
+}
+
+})()
+
+
+index  导航层隐藏  左边图片淡出  $(window).scroll( navScroll() );
+ 
+//角色动画 + 服务器弹窗
+ whichShow = !whichShow
+  whichShow?change($rol2 , $rol1):change($rol1 , $rol2);
+
+function change($1,$2){
+$1.stop();
+$2.stop();
+        $1.addClass("hide").delay(900).queue(function () {
+            $2.removeClass("hide");
+        });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
